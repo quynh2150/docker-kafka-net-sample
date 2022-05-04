@@ -8,6 +8,7 @@
   </a> -->
 
   <h3 align="center">Simple project with Docker-Kafka-Net core 6</h3>
+</div>
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -33,11 +34,13 @@
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
+
 ....
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ### Built With
+
 - [Docker](https://www.docker.com/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
