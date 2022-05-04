@@ -32,7 +32,7 @@ namespace KafkaNet
                     message: new Message<Null, string> { Value = msg },
                     cancellationToken);
             }
-            _producer.Flush(timeout: TimeSpan.FromSeconds(10));
+            _producer.Flush(timeout: TimeSpan.FromSeconds(100));
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
