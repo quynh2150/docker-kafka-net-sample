@@ -1,0 +1,37 @@
+PS D:\work\source\micro\kafka-net> docker pull confluentinc/cp-zookeeper
+PS D:\work\source\micro\kafka-net> docker ps
+PS D:\work\source\micro\kafka-net> docker pull confluentinc/cp-kafka
+PS D:\work\source\micro\kafka-net> docker image ps
+PS D:\work\source\micro\kafka-net> docker images
+PS D:\work\source\micro\kafka-net> docker network create j-kafka
+PS D:\work\source\micro\kafka-net> docker network ps
+PS D:\work\source\micro\kafka-net> docker network ls
+PS D:\work\source\micro\kafka-net> docker run -d --network=j-kafka --name=j-zoo ZOOKEEPER_CLIENT_PORT=2181 -e ZOOKEEPER_TICK_TIME=2000 -p 2181:2181 condfluentinc/cp-zookeeper
+PS D:\work\source\micro\kafka-net> docker run -d --network=j-kafka --name=jzoo ZOOKEEPER_CLIENT_PORT=2181 -e ZOOKEEPER_TICK_TIME=2000 -p 2181:2181 confluentinc/cp-zookeeper
+PS D:\work\source\micro\kafka-net> docker run -d --network=j-kafka --name=jzoo ZOOKEEPER_CLIENT_PORT=2181 -e ZOOKEEPER_TICK_TIME=2000 -p 2181:2181 confluentinc/cp-zookeeper
+PS D:\work\source\micro\kafka-net> docker run -d --network=j-kafka --name=zookeeper ZOOKEEPER_CLIENT_PORT=2181 -e ZOOKEEPER_TICK_TIME=2000 -p 2181:2181 confluentinc/cp-zookeeper
+PS D:\work\source\micro\kafka-net> docker run -d --network=j-kafka --name=j-zoo -e ZOOKEEPER_CLIENT_PORT=2181 -e ZOOKEEPER_TICK_TIME=2000 -p 2181:2181 confluentinc/cp-zookeeper
+PS D:\work\source\micro\kafka-net> doker logs j-zoo
+PS D:\work\source\micro\kafka-net> docker logs j-zoo
+PS D:\work\source\micro\kafka-net> docker run -d --network=j-kafka --name=j-kafka 9092:9092 -e KAFKA_ZOOKEEPER_CONNECT=j-zoo:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 confluentinc/cp-kafka
+PS D:\work\source\micro\kafka-net> docker run -d --network=j-kafka --name=j-kafka 9092:9092 -e KAFKA_ZOOKEEPER_CONNECT=j-zoo:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 confluentinc/cp-kafka
+PS D:\work\source\micro\kafka-net> docker run -d --network=j-kafka --name=j-kafka -p 9092:9092 -e KAFKA_ZOOKEEPER_CONNECT=j-zoo:2181 -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092 confluentinc/cp-kafka
+PS D:\work\source\micro\kafka-net> docker logs z-kafka
+PS D:\work\source\micro\kafka-net> docker logs j-zoo
+PS D:\work\source\micro\kafka-net> docker logs j-kafka
+PS D:\work\source\micro\kafka-net> dotnet new  --list
+PS D:\work\source\micro\kafka-net> dotnet new console -lang "C#" --framework net6.0
+PS D:\work\source\micro\kafka-net> dotnet add package Confluent.Kafka --version 1.8.2
+PS D:\work\source\micro\kafka-net> cat kafka-net.csproj
+PS D:\work\source\micro\kafka-net> cat Program.cs
+PS D:\work\source\micro\kafka-net> cat .\Program.cs
+PS D:\work\source\micro\kafka-net> dotnet sln add D:\work\source\micro\kafka-net
+PS D:\work\source\micro\kafka-net> dotnet build
+PS D:\work\source\micro\kafka-net> echo .>Producer.cs
+PS D:\work\source\micro\kafka-net> ls
+PS D:\work\source\micro\kafka-net> ni dockerfile
+PS D:\work\source\micro\kafka-net> docker-compose exec broker kafka-topics --create --zookeeper localhost:2181 -topic j-topic --create
+PS D:\work\source\micro\kafka-net> ren docker-conpose.yaml docker-compose.yml
+PS D:\work\source\micro\kafka-net> docker exec j-kafka kafka-topics --create --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic Test
+PS D:\work\source\micro\kafka-net> docker exec j-kafka kafka-topics --delete --bootstrap-server localhost:9092  --topic Test
+PS D:\work\source\micro\kafka-net> docker exec j-kafka kafka-topics --create --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic j-topic
