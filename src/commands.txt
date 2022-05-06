@@ -30,8 +30,8 @@ PS D:\...> dotnet build
 PS D:\...> echo .>Producer.cs
 PS D:\...> ls
 PS D:\...> ni dockerfile
-PS D:\...> docker-compose exec broker kafka-topics --create --zookeeper localhost:2181 -topic j-topic --create
+PS D:\...> docker-compose exec broker kafka-topics --create --zookeeper localhost:2181 -topic topic-demo --create
 PS D:\...> ren docker-conpose.yaml docker-compose.yml
 PS D:\...> docker exec j-kafka kafka-topics --create --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic Test
 PS D:\...> docker exec j-kafka kafka-topics --delete --bootstrap-server localhost:9092  --topic Test
-PS D:\...> docker exec j-kafka kafka-topics --create --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic j-topic
+PS D:\...> docker exec j-kafka kafka-topics --create --bootstrap-server localhost:9092 --partitions 1 --replication-factor 1 --topic topic-demo

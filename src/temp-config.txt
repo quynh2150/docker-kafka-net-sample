@@ -1,0 +1,73 @@
+
+    entrypoint: [ '/bin/sh', '-c' ]
+    command: |
+      "# blocks until kafka is reachable
+      kafka-topics --bootstrap-server kafka:29092 --list
+
+      echo -e 'Creating kafka topics'
+      kafka-topics --bootstrap-server kafka:29092 --create --if-not-exists --topic topic-demo --replication-factor 1 --partitions 1
+
+      echo -e 'Successfully created topics:'
+      kafka-topics --bootstrap-server kafka:29092 --list
+version: '2'
+services:
+  zookeeper:
+    image: confluentinc/cp-zookeeper:5.2.x-latest
+    hostname: j-zookeeper
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - j-network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    hostname: j-kafka
+    container_name: kafka
+    depends_on:
+      - zookeeper
+    ports:
+      - '9092:9092'
+    expose:
+      - '29092'
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: '1'
+      KAFKA_MIN_INSYNC_REPLICAS: '1'
+    networks:
+      - j-network
+
+  init-topic:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka-topics-creator
+    depends_on:
+      - zookeeper
+      - kafka
+    build:
+      context: kafka-topic-creator
+    environment:
+      ZOOKEEPER_HOSTS: "zookeeper:32181"
+      KAFKA_TOPICS: "topic-demo"
+  
+networks:
+  default:
+    external:
+      name: j-network
+
+
+      init-topic:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka-topics-creator
+    depends_on:
+      - zookeeper
+      - kafka
+    environment:
+      ZOOKEEPER_HOSTS: "zookeeper:2181"
+      KAFKA_TOPICS: "topic-demo"

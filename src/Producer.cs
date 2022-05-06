@@ -11,7 +11,7 @@ namespace KafkaNet
 
         private readonly IProducer<Null, string> _producer;
 
-        private const string _topic = "j-topic";
+        private const string _topic = "topic-demo";
 
         public ProducerHostedService(ILogger<ProducerHostedService> logger)
         {

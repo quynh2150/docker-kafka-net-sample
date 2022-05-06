@@ -14,7 +14,7 @@ namespace KafkaNet
 
         private readonly ClusterClient _cluster;
 
-        private const string _topic = "j-topic";
+        private const string _topic = "topic-demo";
 
         public ConsumerHostedService(ILogger<ConsumerHostedService> logger)
         {
